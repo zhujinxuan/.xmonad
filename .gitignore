@@ -1,0 +1,6 @@
+xmonad-x86*
+xmonad.errors
+xmonad.hi
+xmonad.o
+my-xmonad-config/dist-newstyle
+my-xmonad-config/result
