@@ -3,4 +3,4 @@ set -e
 
 cd ~/.xmonad/my-xmonad-config
 nix-build shell.nix
-cp result/bin/xmonad-x86_64-linux ~/.xmonad/
+cp -uf result/bin/xmonad-x86_64-linux ~/.xmonad/
