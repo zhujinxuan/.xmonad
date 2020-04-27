@@ -1,7 +1,9 @@
-module Lib (myConfig) where
+module Lib (Lib.config) where
 
 import XMonad
 import XMonad.Config.Kde
+import XMonad.Config.Desktop
+import qualified XMonad.Util.EZConfig as EZ
 import qualified XMonad.StackSet as W -- to shift and float windows
 import XMonad.Layout.NoBorders (hasBorder)
 import XMonad.Util.SpawnOnce (spawnOnce)
@@ -12,24 +14,19 @@ import qualified XMonad.Util.Dzen as DZ
 import qualified My.Pads as Pads
 
 
-
-myConfig = kde4Config  -- this bit calls the kdeConfig
+config = myConfig kde4Config
+myConfig c = c  -- this bit calls the kdeConfig
     { modMask = mod4Mask -- use the Windows button as mod
     , terminal = "urxvt"
-    , manageHook = manageHook kde4Config <+> myManageHook <+> Pads.manageHooks
-    , startupHook =startupHook kde4Config <+> myStartupHook
-    , keys = keys kde4Config <+> myKeys <+> Pads.keys
-    }
+    , manageHook = manageHook c <+> myManageHook <+> Pads.manageHooks
+    , startupHook =startupHook c <+> myStartupHook
+    } `EZ.additionalKeysP` myKeymaps
 
-myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
-myKeys conf@(XConfig {modMask = modm}) = M.fromList $
-    --take a screenshot of entire display
-  [ ((modm, xK_Print ), spawn "scrot shots/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
-    --take a screenshot of focused window
-  , ((modm .|. controlMask, xK_Print ), spawn "scrot shots/window_%Y-%m-%d-%H-%M-%S.png -d 1 -u")
-  , ((modm, xK_z), DZ.dzenConfig (DZ.timeout 6) "foobar")
+myKeymaps =
+  [ ("M-f s", spawn "scrot shots/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
+  , ("M-f S-s", spawn "scrot shots/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
+  , ("M-f <Space>", Pads.popupTerminal)
   ]
-
 
 myManageHook = composeAll . concat $
     [ [ className   =? c --> hasBorder False >> doIgnore >> doFloat | c <- myFloats]
@@ -47,3 +44,5 @@ myStartupHook = do
   spawnOnce "plasmashell"
   spawnOnce "krunner"
   spawnOnce "yakuake"
+  return ()
+  EZ.checkKeymap Lib.config myKeymaps

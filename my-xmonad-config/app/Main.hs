@@ -1,7 +1,7 @@
 module Main where
 
-import XMonad
-import Lib
+import XMonad (xmonad)
+import Lib (config)
 
 main :: IO ()
-main = xmonad myConfig
+main = xmonad config

@@ -1,4 +1,4 @@
-module My.Pads (pads, My.Pads.keys, manageHooks)
+module My.Pads (pads, popupTerminal, manageHooks)
 where
 
 import XMonad
@@ -19,8 +19,6 @@ pads = [ NS term spawnTerm findTerm manageTerm
                    l = 0.5 - w/2
                in customFloating $ W.RationalRect l t w h
 
-keys conf@(XConfig {modMask = modm}) = M.fromList $
-  [ ((modm, xK_bracketright), namedScratchpadAction pads "term")
-  ]
+popupTerminal = namedScratchpadAction pads term
 
 manageHooks = namedScratchpadManageHook pads
