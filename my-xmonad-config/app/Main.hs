@@ -4,4 +4,4 @@ import XMonad
 import Lib
 
 main :: IO ()
-main = xmonad Lib.config
+main = xmonad myConfig

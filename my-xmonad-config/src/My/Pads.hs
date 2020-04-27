@@ -11,14 +11,16 @@ term = "terminal"
 
 pads = [ NS term spawnTerm findTerm manageTerm
        ] where
-  spawnTerm = "urxvt -n scratchpad"
-  findTerm = resource =? "scratchpad"
+  spawnTerm = "urxvt --title scratchpad"
+  findTerm = title =? "scratchpad"
   manageTerm = let h = 0.9
                    w = 0.9
                    t = 0.5 - h/2
                    l = 0.5 - w/2
                in customFloating $ W.RationalRect l t w h
 
-keys = [ ("M-o", namedScratchpadAction pads term)]
+keys conf@(XConfig {modMask = modm}) = M.fromList $
+  [ ((modm, xK_bracketright), namedScratchpadAction pads "term")
+  ]
 
 manageHooks = namedScratchpadManageHook pads
