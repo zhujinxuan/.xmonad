@@ -1,0 +1,4 @@
+package my-xmonad-config
+  flags: use-pkg-config
+package x11
+  flags: pkg-config
