@@ -32,12 +32,13 @@ myKeymaps =
   , ("M-] ;", gotoWindow)
   , ("M-] '", bringWindow)
   , ("<F12>", Pads.popupTerminal)
+  , ("M-] ]", spawn "clipmenu")
   ]
 
 myManageHook = composeAll . concat $
     [ [ className   =? c --> hasBorder False >> doIgnore >> doFloat | c <- myFloats]
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
-    , [ className   =? c --> doF (W.shift "4") | c <- webApps]
+    , [ className   =? c --> doF (W.shift "2") | c <- webApps]
     , [ className   =? c --> doF (W.shift "3") | c <- emacsApps]
     , [ isKDETrayWindow --> doFloat ]
     ]
@@ -49,6 +50,7 @@ myManageHook = composeAll . concat $
 myStartupHook = do
   spawnOnce "plasmashell"
   spawnOnce "krunner"
+  spawnOnce "clipmenud"
   spawnOnce "$HOME/.nix-profile/libexec/org_kde_powerdevil"
   return ()
   EZ.checkKeymap kconfig myKeymaps
