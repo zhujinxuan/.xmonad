@@ -17,6 +17,7 @@ import My.Prompt (bringWindow, gotoWindow)
 
 
 kconfig = myConfig kde4Config
+-- My custom config.
 myConfig c = c  -- this bit calls the kdeConfig
     { modMask = mod4Mask -- use the Windows button as mod
     , terminal = "urxvt"
