@@ -1,5 +1,5 @@
 module Lib (Lib.config) where
 
-import My.KDE
+import My.XFCE
 
-config = kconfig
+config = xfce_config

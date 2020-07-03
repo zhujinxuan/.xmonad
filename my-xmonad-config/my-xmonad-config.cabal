@@ -26,6 +26,7 @@ library
     My.Tabbed
     My.Prompt
     My.KDE
+    My.XFCE
   build-depends:
       base >=4.13 && <4.14
     , xmonad
