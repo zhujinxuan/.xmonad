@@ -2,6 +2,6 @@
 set -e
 
 cd ~/.xmonad/
-nix-build my-xmonad-config/shell.nix
+nix-build my-xmonad-config
 cp -f result/bin/xmonad-x86_64-linux $1
 chmod 755 $1

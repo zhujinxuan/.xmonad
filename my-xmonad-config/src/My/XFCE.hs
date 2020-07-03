@@ -6,13 +6,13 @@ import XMonad.Config.Desktop
 import qualified XMonad.Util.EZConfig as EZ
 import qualified XMonad.StackSet as W -- to shift and float windows
 import XMonad.Layout.NoBorders (hasBorder)
+import XMonad.Hooks.ManageDocks (avoidStruts, ToggleStruts(..))
 import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified Data.Map as M
 import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.CycleWS (nextScreen)
 import qualified XMonad.Util.Dzen as DZ
 import qualified My.Pads as Pads
-import My.Tabbed (myLayout)
 import My.Prompt (bringWindow, gotoWindow)
 
 
@@ -22,8 +22,8 @@ myConfig c = c  -- this bit calls the kdeConfig
     { modMask = mod4Mask -- use the Windows button as mod
     , terminal = "urxvt"
     , manageHook = manageHook c <+> myManageHook <+> Pads.manageHooks
-    , startupHook =startupHook c <+> myStartupHook
-    , layoutHook = myLayout ||| layoutHook c
+    , startupHook = startupHook c <+> myStartupHook
+    , layoutHook = avoidStruts $ layoutHook c
     } `EZ.additionalKeysP` myKeymaps
 
 myKeymaps =
@@ -33,6 +33,7 @@ myKeymaps =
   , ("M-] '", bringWindow)
   , ("<F12>", Pads.popupTerminal)
   , ("M-] ]", spawn "clipmenu")
+  , ("M-] t", sendMessage ToggleStruts)
   ]
 
 myManageHook = composeAll . concat $
