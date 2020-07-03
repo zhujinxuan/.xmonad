@@ -4,7 +4,7 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, containers, stdenv, xmonad
+  f = { mkDerivation, base, containers, stdenv, taffybar, xmonad
       , xmonad-contrib, xmonad-extras
       }:
       mkDerivation {
@@ -14,7 +14,7 @@ let
         isLibrary = true;
         isExecutable = true;
         libraryHaskellDepends = [
-          base containers xmonad xmonad-contrib xmonad-extras
+          base containers taffybar xmonad xmonad-contrib xmonad-extras
         ];
         executableHaskellDepends = [
           base xmonad xmonad-contrib xmonad-extras

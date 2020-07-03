@@ -42,12 +42,11 @@ myManageHook = composeAll . concat $
     , [ className   =? c --> doF (W.shift "3") | c <- emacsApps]
     , [ isKDETrayWindow --> doFloat ]
     ]
-  where myFloats      = []
-        myOtherFloats = ["alsamixer"]
+  where myFloats      = ["plasmashell", "krunner",  "xfrun4", "yakuake", "kmix", "plasma-desktop", "Desktop - Plasma"]
+        myOtherFloats = ["alsamixer", "Plasma-desktop", "Desktop"]
         webApps       = ["Firefox"] -- open on desktop 2
         emacsApps     = ["Emacs"]   -- open on desktop 3
 
 myStartupHook = do
   spawnOnce "clipmenud"
-  spawnOnce "$HOME/.nix-profile/libexec/org_kde_powerdevil"
   EZ.checkKeymap xfce_config myKeymaps
