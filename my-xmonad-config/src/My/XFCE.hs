@@ -31,6 +31,7 @@ myKeymaps =
   , ("M-] S-s", spawn "scrot shots/screen_%Y-%m-%d-%H-%M-%S.png -d 1")
   , ("M-] ;", gotoWindow)
   , ("M-] '", bringWindow)
+  , ("M-p", spawn "$(yeganesh -x -p \"Run:\")")
   , ("<F12>", Pads.popupTerminal)
   , ("M-] ]", spawn "clipmenu")
   , ("M-] t", sendMessage ToggleStruts)
@@ -39,8 +40,8 @@ myKeymaps =
 myManageHook = composeAll . concat $
     [ [ className   =? c --> hasBorder False >> doIgnore >> doFloat | c <- myFloats]
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
-    , [ className   =? c --> doF (W.shift "2") | c <- webApps]
-    , [ className   =? c --> doF (W.shift "3") | c <- emacsApps]
+    , [ className   =? c --> doShift "2" | c <- webApps]
+    , [ className   =? c --> doShift "3" | c <- emacsApps]
     , [ isKDETrayWindow --> doFloat ]
     ]
   where myFloats      = ["plasmashell", "krunner",  "xfrun4", "yakuake", "kmix", "plasma-desktop", "Desktop - Plasma"]
