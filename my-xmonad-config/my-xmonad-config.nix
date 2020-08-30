@@ -1,5 +1,5 @@
-{ mkDerivation, base, containers, stdenv, taffybar, xmonad
-, xmonad-contrib, xmonad-extras
+{ mkDerivation, base, containers, stdenv, xmonad, xmonad-contrib
+, xmonad-extras
 }:
 mkDerivation {
   pname = "my-xmonad-config";
@@ -8,7 +8,7 @@ mkDerivation {
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
-    base containers taffybar xmonad xmonad-contrib xmonad-extras
+    base containers xmonad xmonad-contrib xmonad-extras
   ];
   executableHaskellDepends = [
     base xmonad xmonad-contrib xmonad-extras

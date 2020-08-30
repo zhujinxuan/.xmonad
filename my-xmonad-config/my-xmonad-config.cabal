@@ -33,7 +33,6 @@ library
     , xmonad-contrib
     , xmonad-extras
     , containers
-    , taffybar
   default-language: Haskell2010
   hs-source-dirs: src
 
