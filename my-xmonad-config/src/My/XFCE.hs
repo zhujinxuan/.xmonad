@@ -14,7 +14,7 @@ import XMonad.Actions.CycleWS (nextScreen)
 import qualified XMonad.Util.Dzen as DZ
 import qualified My.Pads as Pads
 import My.Prompt (bringWindow, gotoWindow)
-
+import XMonad.Actions.CycleWS (toggleWS, swapNextScreen, swapPrevScreen)
 
 xfce_config = myConfig xfceConfig
 -- My custom config.
@@ -35,6 +35,9 @@ myKeymaps =
   , ("<F12>", Pads.popupTerminal)
   , ("M-] ]", spawn "clipmenu")
   , ("M-] t", sendMessage ToggleStruts)
+  , ("M-<Down>", toggleWS)
+  , ("M-<Right>", swapNextScreen)
+  , ("M-<Left>", swapPrevScreen)
   ]
 
 myManageHook = composeAll . concat $
